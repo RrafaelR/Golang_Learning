@@ -1,8 +1,16 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"sort"
+)
 
-func runMaps() {
+type person struct {
+	name string
+	age  int
+}
+
+func main() {
 	// lockers := map[int32]string{
 	// 	1: "Books and notebooks",
 	// 	2: "Laptops and ipads",
@@ -13,10 +21,26 @@ func runMaps() {
 	lockers[2] = "Laptops and ipads"
 	//delete(lockers, 1) // -> for delete a pair key - value of the map
 	printMap(lockers)
+
+	println("***********************************")
+	people := map[string]person{
+		"Rafael": {"Rafael", 21},
+		"Maria":  {"Maria", 21},
+		"Julia":  {"Julia", 26},
+		"Kely":   {"Kely", 31},
+	}
+	var keys []string
+	for key := range people {
+		keys = append(keys, key)
+	}
+	sort.Strings(keys) // it put in alphabetic order the keys
+	for _, key := range keys {
+		fmt.Printf("[%s]->{%v}\n", key, people[key])
+	}
 }
 
 func printMap(c map[int]string) {
 	for key, value := range c {
-		fmt.Println(key, ":", value)
+		fmt.Println(key, ":", value) // print keys in alphabetic order
 	}
 }
